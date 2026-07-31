@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Seminários VII, cronograma de aulas</title>
+<meta name="description" content="Cronograma de aulas de Seminários VII, turnos matutino e noturno, de agosto a dezembro de 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16232b;
+  --paper:#eff1ec;
+  --card:#f8f9f6;
+  --rule:#d4d9d0;
+  --muted:#5f6f74;
+  --faint:#8b9a9c;
+  --on-c:#ffffff;
+  --entrega:#a80c2e;
+  --lab:#1057c9;
+  --feriado:#986500;
+}
+:root[data-theme="dark"]{
+  --ink:#e8ece6;
+  --paper:#11171a;
+  --card:#1a2226;
+  --rule:#2c383d;
+  --muted:#9aabaf;
+  --faint:#6d7f84;
+  --on-c:#0d1214;
+  --entrega:#ff667f;
+  --lab:#6c9dff;
+  --feriado:#e8b62c;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Instrument Sans",system-ui,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+
+.topo{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 14px}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);margin:0;
+}
+.tema{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--faint);background:transparent;
+  border:1px solid var(--rule);border-radius:2px;padding:6px 10px;cursor:pointer;
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+.tema:hover{color:var(--ink);border-color:var(--faint)}
+.tema:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.trilha{position:relative;margin:0 0 46px}
+.trilha ol{display:flex;gap:5px;list-style:none;margin:0;padding:0}
+.trilha li{flex:1;position:relative;min-width:0}
+.trilha .seg{display:block;height:4px;border-radius:2px;background:color-mix(in srgb, var(--ink) 22%, var(--paper))}
+.trilha .num{
+  display:block;margin-top:7px;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--faint);
+}
+.trilha li[aria-current] .seg{height:6px;margin-top:-1px;background:var(--ink)}
+.trilha li[aria-current] .num{color:var(--ink);font-weight:500}
+.aqui{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;white-space:nowrap;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink);
+}
+
+h1{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(34px,7vw,58px);line-height:.98;letter-spacing:-.025em;margin:0 0 18px;
+}
+.lede{max-width:52ch;color:var(--muted);margin:0 0 30px;font-size:17px}
+
+.turnos{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.turno{
+  font:500 14px/1 "Instrument Sans",sans-serif;
+  border:1px solid var(--rule);background:transparent;color:var(--ink);
+  border-radius:2px;padding:11px 15px;cursor:pointer;
+  display:inline-flex;align-items:baseline;gap:8px;
+  transition:border-color .15s,background .15s;
+}
+.turno small{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);letter-spacing:.06em}
+.turno:hover{border-color:var(--ink)}
+.turno:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.turno[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
+.turno[aria-pressed="true"] small{color:var(--paper);opacity:.7}
+
+.nota-turno{
+  margin:0 0 34px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:14px;color:var(--muted);max-width:62ch;
+}
+
+.aula{
+  display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:start;
+  padding:20px 0;border-top:1px solid var(--rule);
+}
+.aula:last-of-type{border-bottom:1px solid var(--rule)}
+.data{font-family:"IBM Plex Mono",monospace;line-height:1.35}
+.data .d{font-size:20px;font-weight:500;display:block;letter-spacing:-.02em}
+.data .semana{font-size:11px;color:var(--faint);display:block;margin-top:2px;text-transform:lowercase}
+.titulo{font-size:16px;color:var(--ink);margin:0;line-height:1.45}
+.marcas{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.marca{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;padding:4px 8px;border-radius:2px;
+  border:1px solid;display:inline-block;
+}
+.m-entrega{color:var(--entrega);border-color:color-mix(in srgb, var(--entrega) 45%, transparent);background:color-mix(in srgb, var(--entrega) 9%, transparent)}
+.m-lab{color:var(--lab);border-color:color-mix(in srgb, var(--lab) 45%, transparent);background:color-mix(in srgb, var(--lab) 9%, transparent)}
+.m-feriado{color:var(--feriado);border-color:color-mix(in srgb, var(--feriado) 45%, transparent);background:color-mix(in srgb, var(--feriado) 9%, transparent)}
+.m-proxima{color:var(--on-c);background:var(--ink);border-color:var(--ink)}
+
+.aula.entrega .titulo{font-weight:600}
+.aula.entrega .data .d{color:var(--entrega)}
+.aula.sem-aula{opacity:.55}
+.aula.sem-aula .titulo{font-style:italic}
+.aula.folga .data .d{color:var(--feriado)}
+.aula.proxima{position:relative}
+.aula.proxima::before{
+  content:"";position:absolute;left:-16px;top:20px;bottom:20px;width:3px;background:var(--ink);border-radius:2px;
+}
+
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);font-size:13px;color:var(--faint)}
+
+@media (max-width:640px){
+  .wrap{padding:28px 18px 60px}
+  .aula{grid-template-columns:1fr;gap:10px;padding:18px 0}
+  .data{display:flex;align-items:baseline;gap:9px}
+  .data .d{font-size:18px}
+  .aula.proxima::before{left:-10px}
+  .trilha .num{font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body{background:#fff;color:#000}
+  .tema,.turnos{display:none}
+  .aula{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="topo">
+    <p class="eyebrow">Seminários VII</p>
+    <button class="tema" id="tema" type="button">Tema claro</button>
+  </div>
+
+  <nav class="trilha" aria-label="Trilha de Seminários, do I ao VIII">
+    <ol>
+      <li><span class="seg"></span><span class="num">I</span></li>
+      <li><span class="seg"></span><span class="num">II</span></li>
+      <li><span class="seg"></span><span class="num">III</span></li>
+      <li><span class="seg"></span><span class="num">IV</span></li>
+      <li><span class="seg"></span><span class="num">V</span></li>
+      <li><span class="seg"></span><span class="num">VI</span></li>
+      <li aria-current="step"><span class="seg"></span><span class="num">VII</span><span class="aqui">você está aqui</span></li>
+      <li><span class="seg"></span><span class="num">VIII</span></li>
+    </ol>
+  </nav>
+
+  <h1>Cronograma<br>de aulas</h1>
+  <p class="lede">Encontros semanais de agosto a dezembro de 2026. A análise conjuntural e o questionário correm em paralelo, com três entregas ao longo do semestre.</p>
+</header>
+
+<div class="turnos" role="group" aria-label="Turno">
+  <button class="turno" type="button" data-turno="mat" aria-pressed="true">Matutino <small>quintas</small></button>
+  <button class="turno" type="button" data-turno="not" aria-pressed="false">Noturno <small>segundas</small></button>
+</div>
+<p class="nota-turno" id="nota-turno"></p>
+
+<main id="aulas"></main>
+
+<footer>
+  <p>A escolha de turno e de tema fica salva neste navegador.</p>
+</footer>
+</div>
+
+<script>
+/* Conteúdo das aulas, na ordem. As datas são atribuídas na montagem,
+   pulando os feriados do turno noturno. */
+const CONTEUDO = [
+  { t:"Alinhamentos iniciais sobre extensão" },
+  { t:"Orientação da análise conjuntural" },
+  { t:"Pré-teste do questionário e feedback" },
+  { t:"Orientação sobre contato com a escola para aplicação e formatação do questionário" },
+  { t:"Entrega da primeira versão da análise conjuntural", entrega:true },
+  { t:"Entrega da versão final do questionário", entrega:true },
+  { t:"Orientação da análise conjuntural" },
+  { t:"Aplicação do questionário" },
+  { t:"Análise dos dados do questionário, RStudio o retorno", lab:true },
+  { t:"MINIONU, não haverá aula presencial, relato de trabalho por escrito", semAula:true },
+  { t:"Orientação sobre análise conjuntural" },
+  { t:"Análise dos dados do questionário e orientação para análise conjuntural", lab:true },
+  { t:"Análise dos dados do questionário e orientação para análise conjuntural", lab:true },
+  { t:"Entrega da versão final da análise conjuntural", entrega:true },
+  { t:"Mapeamento de possíveis intervenções" },
+  { t:"Mapeamento de possíveis intervenções" },
+  { t:"Dúvidas e questões" },
+  { t:"Encerramento e alinhamentos finais" }
+];
+
+const DATAS = {
+  mat:["06/08","13/08","20/08","27/08","03/09","10/09","17/09","24/09","01/10",
+       "08/10","15/10","22/10","29/10","05/11","12/11","19/11","26/11","03/12"],
+  not:["03/08","10/08","17/08","24/08","31/08","07/09","14/09","21/09","28/09",
+       "05/10","12/10","19/10","26/10","02/11","09/11","16/11","23/11","30/11"]
+};
+
+/* Feriados nacionais que caem em segunda-feira no semestre. */
+const FERIADOS = {
+  "07/09":"Independência",
+  "12/10":"Nossa Senhora Aparecida",
+  "02/11":"Finados"
+};
+
+const CHAVE = "seminarios7";
+let turno = "mat";
+try { turno = localStorage.getItem(CHAVE + "-turno") || "mat"; } catch (e) {}
+
+const hoje = new Date();
+hoje.setHours(0,0,0,0);
+
+function paraData(d){
+  const [dia, mes] = d.split("/").map(Number);
+  return new Date(2026, mes - 1, dia);
+}
+
+function linhasDoTurno(t){
+  const linhas = [];
+  let i = 0;
+  for (const data of DATAS[t]) {
+    const feriado = FERIADOS[data];
+    if (feriado) { linhas.push({ data, feriado }); continue; }
+    if (i >= CONTEUDO.length) break;
+    linhas.push(Object.assign({ data }, CONTEUDO[i++]));
+  }
+  return linhas;
+}
+
+function montar(){
+  const alvo = document.getElementById("aulas");
+  const semana = turno === "mat" ? "quinta" : "segunda";
+  const linhas = linhasDoTurno(turno);
+
+  let proxima = -1;
+  linhas.forEach((l, i) => {
+    if (proxima === -1 && !l.feriado && paraData(l.data) >= hoje) proxima = i;
+  });
+
+  alvo.innerHTML = linhas.map((l, i) => {
+    const classes = ["aula"];
+    if (l.entrega) classes.push("entrega");
+    if (l.semAula) classes.push("sem-aula");
+    if (l.feriado) classes.push("sem-aula", "folga");
+    if (i === proxima) classes.push("proxima");
+
+    const marcas = [];
+    if (i === proxima) marcas.push('<span class="marca m-proxima">Próxima aula</span>');
+    if (l.entrega) marcas.push('<span class="marca m-entrega">Entrega</span>');
+    if (l.lab) marcas.push('<span class="marca m-lab">Laboratório</span>');
+    if (l.feriado) marcas.push('<span class="marca m-feriado">' + l.feriado + '</span>');
+
+    return '<section class="' + classes.join(" ") + '">' +
+      '<div class="data"><span class="d">' + l.data + '</span>' +
+      '<span class="semana">' + semana + '</span></div>' +
+      '<div><p class="titulo">' + (l.feriado ? "Feriado" : l.t) + '</p>' +
+      (marcas.length ? '<div class="marcas">' + marcas.join("") + '</div>' : '') +
+      '</div></section>';
+  }).join("");
+
+  document.getElementById("nota-turno").textContent = turno === "mat"
+    ? "Turno matutino, aulas às quintas-feiras, de 06/08 a 03/12."
+    : "Turno noturno, aulas às segundas-feiras, de 03/08 a 30/11. Três segundas caem em feriado nacional, então o conteúdo de cada uma passa para a aula seguinte e o semestre fecha em 30/11.";
+
+  document.querySelectorAll(".turno").forEach(b =>
+    b.setAttribute("aria-pressed", b.dataset.turno === turno));
+}
+
+document.querySelectorAll(".turno").forEach(b => b.addEventListener("click", () => {
+  turno = b.dataset.turno;
+  try { localStorage.setItem(CHAVE + "-turno", turno); } catch (e) {}
+  montar();
+}));
+
+const btnTema = document.getElementById("tema");
+function aplicarTema(t){
+  document.documentElement.setAttribute("data-theme", t);
+  btnTema.textContent = t === "dark" ? "Tema claro" : "Tema escuro";
+  try { localStorage.setItem(CHAVE + "-tema", t); } catch (e) {}
+}
+let tema = "dark";
+try { tema = localStorage.getItem(CHAVE + "-tema") || "dark"; } catch (e) {}
+aplicarTema(tema);
+btnTema.addEventListener("click", () => {
+  aplicarTema(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
+
+montar();
+</script>
+</body>
+</html>
