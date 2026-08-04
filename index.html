@@ -204,46 +204,53 @@ footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);font-si
 </div>
 
 <script>
-/* Conteúdo das aulas, na ordem. As datas são atribuídas na montagem,
-   pulando os feriados do turno noturno. */
-const CONTEUDO = [
-  { t:"Alinhamentos iniciais sobre extensão" },
-  { t:"Feedback dos desenhos de pesquisa realizados no semestre passado" },
-  { t:"Entrega da turma de 10 perguntas sobre ODS e ODS 5", tipo:"entrega" },
-  { t:"Entrega dos grupos de 10 perguntas específicas do desenho de pesquisa e pré-teste em sala", tipo:"entrega" },
-  { t:"Entrega da primeira versão da análise conjuntural", tipo:"entrega" },
-  { t:"Entrega da versão final do questionário", tipo:"entrega" },
-  { t:"Orientação da análise conjuntural" },
-  { t:"Aplicação do questionário", tipo:"campo" },
-  { t:"Análise dos dados do questionário, RStudio o retorno", tipo:"analise" },
-  { t:"MINIONU, não haverá aula presencial, relato de trabalho por escrito", tipo:"semaula" },
-  { t:"Orientação sobre análise conjuntural" },
-  { t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
-  { t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
-  { t:"Entrega da versão final da análise conjuntural", tipo:"entrega" },
-  { t:"Mapeamento de possíveis intervenções" },
-  { t:"Mapeamento de possíveis intervenções" },
-  { t:"Dúvidas e questões" },
-  { t:"Encerramento e alinhamentos finais" }
-];
+/* Aulas de cada turno, com data, título e tipo já definidos por linha. */
+const AULAS = {
+  mat: [
+    { data:"06/08", t:"Alinhamentos iniciais sobre extensão" },
+    { data:"13/08", t:"Feedback dos desenhos de pesquisa realizados no semestre passado" },
+    { data:"20/08", t:"Feedback sobre perguntas para o questionário" },
+    { data:"27/08", t:"Pré-teste do questionário e discussão da turma" },
+    { data:"03/09", t:"Orientação da análise conjuntural" },
+    { data:"10/09", t:"Entrega da versão final do questionário", tipo:"entrega" },
+    { data:"17/09", t:"Entrega da primeira versão da análise conjuntural", tipo:"entrega" },
+    { data:"24/09", t:"Aplicação do questionário", tipo:"campo" },
+    { data:"01/10", t:"Análise dos dados do questionário, retomada do trabalho com R", tipo:"analise" },
+    { data:"08/10", t:"MINIONU, não haverá aula presencial", tipo:"semaula" },
+    { data:"15/10", t:"Feedback da primeira versão da análise conjuntural" },
+    { data:"22/10", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
+    { data:"29/10", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
+    { data:"05/11", t:"Entrega da versão final da análise conjuntural", tipo:"entrega" },
+    { data:"12/11", t:"Mapeamento de possíveis intervenções" },
+    { data:"19/11", t:"Mapeamento de possíveis intervenções" },
+    { data:"26/11", t:"Dúvidas e questões" },
+    { data:"03/12", t:"Encerramento e alinhamentos finais" }
+  ],
+  not: [
+    { data:"03/08", t:"Alinhamentos iniciais sobre extensão" },
+    { data:"10/08", t:"Feedback dos desenhos de pesquisa realizados no semestre passado" },
+    { data:"17/08", t:"Entrega da turma de 10 perguntas sobre ODS e ODS 5" },
+    { data:"24/08", t:"Entrega dos grupos de 10 perguntas específicas do desenho de pesquisa e pré-teste em sala" },
+    { data:"31/08", t:"Entrega da primeira versão da análise conjuntural", tipo:"entrega" },
+    { data:"07/09", t:"Feriado, Independência", tipo:"semaula" },
+    { data:"14/09", t:"Entrega da versão final do questionário", tipo:"entrega" },
+    { data:"21/09", t:"Orientação da análise conjuntural" },
+    { data:"28/09", t:"Aplicação do questionário", tipo:"campo" },
+    { data:"05/10", t:"Análise dos dados do questionário, retomada do trabalho com R", tipo:"analise" },
+    { data:"12/10", t:"Feriado, Nossa Senhora Aparecida", tipo:"semaula" },
+    { data:"19/10", t:"MINIONU, não haverá aula presencial", tipo:"semaula" },
+    { data:"26/10", t:"Orientação sobre análise conjuntural" },
+    { data:"02/11", t:"Feriado, Finados", tipo:"semaula" },
+    { data:"09/11", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
+    { data:"16/11", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise" },
+    { data:"23/11", t:"Entrega da versão final da análise conjuntural", tipo:"entrega" },
+    { data:"30/11", t:"Mapeamento de possíveis intervenções" }
+  ]
+};
 
 const ETIQUETA = {
   campo:"Campo", analise:"Análise",
   entrega:"Entrega", semaula:"Sem aula"
-};
-
-const DATAS = {
-  mat:["06/08","13/08","20/08","27/08","03/09","10/09","17/09","24/09","01/10",
-       "08/10","15/10","22/10","29/10","05/11","12/11","19/11","26/11","03/12"],
-  not:["03/08","10/08","17/08","24/08","31/08","07/09","14/09","21/09","28/09",
-       "05/10","12/10","19/10","26/10","02/11","09/11","16/11","23/11","30/11"]
-};
-
-/* Feriados nacionais que caem em segunda-feira no semestre. */
-const FERIADOS = {
-  "07/09":"Independência",
-  "12/10":"Nossa Senhora Aparecida",
-  "02/11":"Finados"
 };
 
 const CHAVE = "seminarios7";
@@ -258,47 +265,33 @@ function paraData(d){
   return new Date(2026, mes - 1, dia);
 }
 
-function linhasDoTurno(t){
-  const linhas = [];
-  let i = 0;
-  for (const data of DATAS[t]) {
-    const feriado = FERIADOS[data];
-    if (feriado) { linhas.push({ data, feriado }); continue; }
-    if (i >= CONTEUDO.length) break;
-    linhas.push(Object.assign({ data }, CONTEUDO[i++]));
-  }
-  return linhas;
-}
-
 function montar(){
   const alvo = document.getElementById("aulas");
   const semana = turno === "mat" ? "quinta" : "segunda";
-  const linhas = linhasDoTurno(turno);
+  const linhas = AULAS[turno];
 
   let proxima = -1;
   linhas.forEach((l, i) => {
-    if (proxima === -1 && !l.feriado && paraData(l.data) >= hoje) proxima = i;
+    if (proxima === -1 && l.tipo !== "semaula" && paraData(l.data) >= hoje) proxima = i;
   });
 
   alvo.innerHTML = linhas.map((l, i) => {
-    const tipo = l.feriado ? "semaula" : l.tipo;
     const marcas = [];
     if (i === proxima) marcas.push('<span class="marca m-proxima">Próxima aula</span>');
-    if (tipo) marcas.push('<span class="marca">' + ETIQUETA[tipo] + '</span>');
-    if (l.feriado) marcas.push('<span class="marca">' + l.feriado + '</span>');
+    if (l.tipo) marcas.push('<span class="marca">' + ETIQUETA[l.tipo] + '</span>');
 
     return '<section class="aula' + (i === proxima ? ' proxima' : '') + '"' +
-      (tipo ? ' data-tipo="' + tipo + '"' : '') + '>' +
+      (l.tipo ? ' data-tipo="' + l.tipo + '"' : '') + '>' +
       '<div class="data"><span class="d">' + l.data + '</span>' +
       '<span class="semana">' + semana + '</span></div>' +
-      '<div><p class="titulo">' + (l.feriado ? "Feriado" : l.t) + '</p>' +
+      '<div><p class="titulo">' + l.t + '</p>' +
       '<div class="marcas">' + marcas.join("") + '</div>' +
       '</div></section>';
   }).join("");
 
   document.getElementById("nota-turno").textContent = turno === "mat"
     ? "Turno matutino, aulas às quintas-feiras, de 06/08 a 03/12."
-    : "Turno noturno, aulas às segundas-feiras, de 03/08 a 30/11. Três segundas caem em feriado nacional, então o conteúdo de cada uma passa para a aula seguinte e o semestre fecha em 30/11.";
+    : "Turno noturno, aulas às segundas-feiras, de 03/08 a 30/11. Três segundas caem em feriado nacional.";
 
   document.querySelectorAll(".turno").forEach(b =>
     b.setAttribute("aria-pressed", b.dataset.turno === turno));
