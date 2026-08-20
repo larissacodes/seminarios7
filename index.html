@@ -191,6 +191,7 @@ footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);font-si
 <p class="nota-turno" id="nota-turno"></p>
 
 <div class="legenda">
+  <span><i style="background:var(--c-metodo)"></i>Minicurso</span>
   <span><i style="background:var(--c-campo)"></i>Campo</span>
   <span><i style="background:var(--c-analise)"></i>Análise</span>
   <span><i style="background:var(--c-entrega)"></i>Entrega</span>
@@ -211,20 +212,20 @@ const AULAS = {
   mat: [
     { data:"06/08", t:"Alinhamentos iniciais sobre extensão" },
     { data:"13/08", t:"Orientação da análise conjuntural" },
-    { data:"20/08", t:"Pré-teste do questionário e feedback" },
-    { data:"27/08", t:"Orientação sobre contato com a escola para aplicação e formatação do questionário" },
-    { data:"03/09", t:"Entrega da primeira versão da análise conjuntural", tipo:"entrega" },
-    { data:"10/09", t:"Entrega da versão final do questionário", tipo:"entrega" },
-    { data:"17/09", t:"Orientação da análise conjuntural" },
-    { data:"24/09", t:"Aplicação do questionário", tipo:"campo" },
-    { data:"01/10", t:"Análise dos dados do questionário / RStudio: o retorno", tipo:"analise", lab:true },
+    { data:"20/08", t:"Orientação da análise conjuntural" },
+    { data:"27/08", t:"Questionário, perguntas por grupo" },
+    { data:"03/09", t:"Minicurso e entrega do desenho de pesquisa", tipo:"entrega" },
+    { data:"10/09", t:"Minicurso", tipo:"metodo" },
+    { data:"17/09", t:"Minicurso", tipo:"metodo" },
+    { data:"24/09", t:"Pré-teste" },
+    { data:"01/10", t:"Aplicação do questionário", tipo:"campo" },
     { data:"08/10", t:"MINIONU, não haverá aula presencial, relato de trabalho por escrito", tipo:"semaula" },
-    { data:"15/10", t:"Orientação sobre análise conjuntural" },
-    { data:"22/10", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise", lab:true },
+    { data:"15/10", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise", lab:true },
+    { data:"22/10", t:"Entrega da versão preliminar da análise conjuntural", tipo:"entrega" },
     { data:"29/10", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise", lab:true },
-    { data:"05/11", t:"Entrega da versão final da análise conjuntural", tipo:"entrega" },
-    { data:"12/11", t:"Mapeamento de possíveis intervenções" },
-    { data:"19/11", t:"Mapeamento de possíveis intervenções" },
+    { data:"05/11", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise", lab:true },
+    { data:"12/11", t:"Análise dos dados do questionário e orientação para análise conjuntural", tipo:"analise", lab:true },
+    { data:"19/11", t:"Entrega da versão final da análise conjuntural", tipo:"entrega" },
     { data:"26/11", t:"Dúvidas e questões" },
     { data:"03/12", t:"Encerramento e alinhamentos finais" }
   ],
@@ -251,7 +252,7 @@ const AULAS = {
 };
 
 const ETIQUETA = {
-  campo:"Campo", analise:"Análise",
+  metodo:"Minicurso", campo:"Campo", analise:"Análise",
   entrega:"Entrega", semaula:"Sem aula"
 };
 
@@ -293,7 +294,7 @@ function montar(){
   }).join("");
 
   document.getElementById("nota-turno").textContent = turno === "mat"
-    ? "Turno matutino, aulas às quintas-feiras, de 06/08 a 03/12. As aulas de análise do questionário acontecem no laboratório."
+    ? "Turno matutino, aulas às quintas-feiras, de 06/08 a 03/12. O minicurso ocupa três encontros em setembro e as aulas de análise do questionário acontecem no laboratório."
     : "Turno noturno, aulas às segundas-feiras, de 03/08 a 30/11. Três segundas caem em feriado nacional.";
 
   document.querySelectorAll(".turno").forEach(b =>
